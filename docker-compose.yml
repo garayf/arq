@@ -1,0 +1,22 @@
+version: '2'
+services:
+  profilepictures:
+    build: ./profilepictures
+    image: profilepictures/profilepictures
+    container_name: profilepictures-ms
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      VIRTUAL_HOST: profilepictures.local
+    ports:
+      - "3003:8080"
+
+  db:
+    image: mongo:3.3
+    container_name: profilepicture-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./backup:/backup:rw
